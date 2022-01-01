@@ -5,6 +5,9 @@ require("express-async-errors");
 //cookies
 const cookieParser = require("cookie-parser");
 
+//cors
+const cors = require("cors");
+
 const port = process.env.PORT || 3000;
 
 //express
@@ -27,8 +30,11 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cookieParser(process.env.JWT_SECRET)); //For accessing the cookies and argument signs the cookie.
+app.use(express.static("../final-front-end/front-end"));
+app.use(cors());
 
 //routes
+
 app.get("/", (req, res) => {
   console.log(req.signedCookies);
   res.send("ECommerce API");
