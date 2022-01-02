@@ -22,6 +22,7 @@ const connectDB = require("./db/connect");
 
 //routers
 const authRoutes = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes");
 
 //middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
   res.send("ECommerce API");
 });
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRouter);
 
 //middleware setup
 app.use(notFoundMiddleware);

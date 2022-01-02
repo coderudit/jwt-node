@@ -1,4 +1,3 @@
-const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 
 const createJWT = ({ payload }) => {
@@ -23,4 +22,8 @@ const attachCookiesToResponse = ({ res, user }) => {
   });
 };
 
-module.exports = { createJWT, isTokenValid, attachCookiesToResponse };
+module.exports = {
+  createJWT,
+  isTokenValid,
+  attachCookiesToResponse,
+};
