@@ -16,6 +16,7 @@ const app = express();
 
 //other packages
 const morgan = require("morgan"); //Route information
+const fileUpload = require("express-fileupload");
 
 //database
 const connectDB = require("./db/connect");
@@ -23,6 +24,7 @@ const connectDB = require("./db/connect");
 //routers
 const authRoutes = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
+const productRouter = require("./routes/productRoutes");
 
 //middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -33,6 +35,8 @@ app.use(morgan("tiny"));
 app.use(cookieParser(process.env.JWT_SECRET)); //For accessing the cookies and argument signs the cookie.
 app.use(express.static("../final-front-end/front-end"));
 app.use(cors());
+app.use(express.static("./public"));
+app.use(fileUpload());
 
 //routes
 
@@ -42,6 +46,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/products", productRouter);
 
 //middleware setup
 app.use(notFoundMiddleware);
